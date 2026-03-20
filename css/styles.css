@@ -103,16 +103,25 @@ a {
   line-height: 1.2;
 }
 
+/* Width for JS: largest font that keeps tagline on one line */
+.tagline-wrap {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 0 16px;
+  overflow: hidden;
+  text-align: center;
+}
+
 .tagline {
   margin: 0;
-  padding: 8px 16px 16px;
+  padding: 0;
+  display: inline-block;
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 16px; /* fallback before JS; overridden for fit */
   font-weight: 700;
   color: var(--color-primary);
-  line-height: 1.35;
-  max-width: 22rem;
-  margin-inline: auto;
+  line-height: normal;
+  white-space: nowrap;
 }
 
 /* —— Hero —— */

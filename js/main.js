@@ -1,6 +1,68 @@
 (function () {
   "use strict";
 
+  /** Largest font size (px) so tagline stays on one line within .tagline-wrap */
+  function fitTagline() {
+    var wrap = document.querySelector(".tagline-wrap");
+    var el = document.querySelector(".tagline");
+    if (!wrap || !el) return;
+
+    var targetW = wrap.clientWidth;
+    if (targetW < 8) return;
+
+    var minPx = 8;
+    var maxPx = 22;
+
+    el.style.fontSize = maxPx + "px";
+    if (el.scrollWidth <= targetW + 0.5) {
+      el.style.fontSize = maxPx + "px";
+      return;
+    }
+
+    var lo = minPx;
+    var hi = maxPx;
+    var best = minPx;
+    var i;
+    for (i = 0; i < 32; i++) {
+      var mid = (lo + hi) / 2;
+      el.style.fontSize = mid + "px";
+      if (el.scrollWidth <= targetW) {
+        best = mid;
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+      if (hi - lo < 0.12) break;
+    }
+    el.style.fontSize = Math.round(best * 100) / 100 + "px";
+  }
+
+  function initTaglineFit() {
+    function run() {
+      fitTagline();
+    }
+
+    run();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(run);
+    }
+
+    var wrap = document.querySelector(".tagline-wrap");
+    if (wrap && typeof ResizeObserver !== "undefined") {
+      var ro = new ResizeObserver(function () {
+        fitTagline();
+      });
+      ro.observe(wrap);
+    }
+
+    window.addEventListener("orientationchange", function () {
+      setTimeout(fitTagline, 200);
+    });
+    window.addEventListener("resize", function () {
+      fitTagline();
+    });
+  }
+
   function initCarousels() {
     var carousels = document.querySelectorAll("[data-carousel]");
 
@@ -52,9 +114,14 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCarousels);
-  } else {
+  function init() {
+    initTaglineFit();
     initCarousels();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
   }
 })();
