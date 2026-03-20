@@ -126,44 +126,54 @@ a {
   white-space: nowrap;
 }
 
-/* —— Hero —— */
+/* —— Hero ——
+   Image width fixed to Figma strip; full-width gradient (right → left) keeps text on opaque maroon; hero base fill avoids white bleed where the strip ends. */
 .hero {
   position: relative;
   min-height: 205px;
   overflow: hidden;
+  /* Solid base so gradient transparency never reveals body white beside the photo strip */
+  background: var(--color-accent);
 }
 
-.hero__image-wrap {
+.hero__media {
   position: absolute;
+  z-index: 0;
   left: 0;
   top: 0;
   bottom: 0;
   width: min(86.3%, 347px);
-  min-height: 205px;
+  overflow: hidden;
 }
 
 .hero__photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 205px;
   object-fit: cover;
   object-position: center top;
 }
 
+/* Opaque at the right (text); fade begins further right so more floral shows on the left */
 .hero__gradient {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
-    269.59deg,
-    rgb(101, 9, 52) 19.99%,
-    rgba(203, 18, 105, 0) 82.92%
+    to left,
+    rgb(101, 9, 52) 0%,
+    rgb(101, 9, 52) 22%,
+    rgba(101, 9, 52, 0.58) 44%,
+    rgba(101, 9, 52, 0.14) 68%,
+    rgba(101, 9, 52, 0) 100%
   );
   pointer-events: none;
 }
 
 .hero__copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   margin-left: auto;
   max-width: 268px;
   width: 66.5%;
@@ -219,7 +229,7 @@ a {
 .cta-block__sub {
   margin: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 26px;
 }
 
