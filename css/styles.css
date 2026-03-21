@@ -542,8 +542,8 @@ a {
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 50;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--color-accent);
   color: var(--color-white);
@@ -649,8 +649,9 @@ a {
 
 .footer-brand {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
   align-items: center;
+  gap: 12px;
   padding: 20px 23px 24px;
   max-width: var(--layout-max-width);
   margin-inline: auto;
