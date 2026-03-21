@@ -99,24 +99,60 @@
         }
       }
 
+      function updateEndMask() {
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        var atEnd = maxScroll <= 2 || track.scrollLeft >= maxScroll - 3;
+        carousel.classList.toggle("carousel--at-end", atEnd);
+      }
+
       var scrollTimer;
       track.addEventListener(
         "scroll",
         function () {
           clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(updateDots, 50);
+          scrollTimer = setTimeout(function () {
+            updateDots();
+            updateEndMask();
+          }, 50);
         },
         { passive: true }
       );
 
-      window.addEventListener("resize", updateDots, { passive: true });
+      function onResizeCarousel() {
+        updateDots();
+        updateEndMask();
+      }
+
+      window.addEventListener("resize", onResizeCarousel, { passive: true });
       updateDots();
+      updateEndMask();
+      requestAnimationFrame(updateEndMask);
     });
+  }
+
+  function initFooterReveal() {
+    if (typeof IntersectionObserver === "undefined") return;
+
+    var footer = document.querySelector(".site-footer");
+    if (!footer) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        if (entries[0].isIntersecting) {
+          footer.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(footer);
   }
 
   function init() {
     initTaglineFit();
     initCarousels();
+    initFooterReveal();
   }
 
   if (document.readyState === "loading") {
