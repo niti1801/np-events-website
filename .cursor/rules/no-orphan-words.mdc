@@ -1,0 +1,38 @@
+---
+description: Avoid orphan/widow words in visible UI copy and headings
+alwaysApply: true
+---
+
+# No orphan words in visual design
+
+An **orphan** (widow in body copy) is a **single word** stranded alone on the **last line** of a paragraph, heading, button label, or CTA—bad rhythm and looks unfinished.
+
+## When editing this site
+
+- **Reword** so the last line has at least two words, or roughly balances with the line above.
+- **Tie the last two words** with a non-breaking space so they stay together: `last&nbsp;words` or the Unicode narrow no-break space between words that must stay paired.
+- **Headings and short lines**: prefer `text-wrap: balance` in CSS where it fits (supported in modern browsers) so multi-line titles don’t leave one word alone.
+- **Don’t** rely only on `<br>` for whole paragraphs unless it’s intentional poetry-style layout.
+
+## Check after changes
+
+Skim **hero**, **CTAs**, **section titles**, **project descriptions**, **footer**, and **buttons** at mobile and desktop widths; fix any line that ends with a lone short word.
+
+## Examples
+
+```html
+<!-- ❌ Last line might render as one word: "requirements." -->
+<p>…event requirements.</p>
+
+<!-- ✅ Keep "event requirements" together -->
+<p>…event&nbsp;requirements.</p>
+```
+
+```css
+/* ✅ Help multi-line headings avoid a single word on the last line */
+.section-title {
+  text-wrap: balance;
+}
+```
+
+If balance or copy edits can’t fix it without harming readability, **shorten or split the sentence** instead of leaving a visual orphan.

@@ -216,9 +216,7 @@ a {
 
 .cta-block--closing {
   padding-top: 2.5rem;
-  padding-bottom: 1.25rem;
-  align-items: flex-start;
-  text-align: left;
+  padding-bottom: 3rem;
 }
 
 .cta-block__lead {
@@ -235,6 +233,7 @@ a {
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
+  text-wrap: balance;
 }
 
 .btn {
@@ -449,6 +448,14 @@ a {
 
 .contact-grid__icon {
   margin-top: 2px;
+}
+
+/* WhatsApp mark reads larger at 24px; scale down for parity with envelope & location */
+.contact-grid__icon--whatsapp {
+  width: 20px;
+  height: 20px;
+  justify-self: center;
+  margin-top: 4px;
 }
 
 .contact-grid__link,
