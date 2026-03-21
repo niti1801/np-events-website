@@ -256,7 +256,7 @@ a {
 
 .cta-block--closing {
   padding-top: 2.5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 4rem;
   /* Explicit centering (matches first CTA); avoids left drift from flex defaults or cached CSS */
   align-items: center;
   text-align: center;
@@ -536,6 +536,72 @@ a {
   transform: scale(1.15);
 }
 
+/* —— Testimonials —— */
+.testimonials {
+  padding: 0.5rem 23px 3.5rem;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+}
+
+.testimonial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.testimonial {
+  margin: 0;
+  padding: 1.25rem 1.25rem 1.25rem 1.125rem;
+  border-left: 3px solid var(--color-primary);
+  background: #fdf7f9;
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+}
+
+.testimonial__quote {
+  margin: 0 0 0.875rem;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.testimonial__quote::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  line-height: 0;
+  vertical-align: -0.6rem;
+  color: var(--color-primary);
+  margin-right: 0.1rem;
+  opacity: 0.55;
+}
+
+.testimonial__author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.01em;
+}
+
+.testimonial__event {
+  font-size: 13px;
+  color: var(--color-secondary);
+  font-weight: 400;
+}
+
+/* Stagger reveal for individual testimonial cards */
+@media (prefers-reduced-motion: no-preference) {
+  .testimonial[data-reveal].is-visible:nth-child(1) { animation-delay: 0s; }
+  .testimonial[data-reveal].is-visible:nth-child(2) { animation-delay: 0.1s; }
+  .testimonial[data-reveal].is-visible:nth-child(3) { animation-delay: 0.2s; }
+}
+
 /* —— Scroll to top —— */
 .scroll-top {
   position: fixed;
@@ -677,6 +743,7 @@ a {
   .hero,
   .cta-block,
   .portfolio,
+  .testimonials,
   .site-footer,
   .footer-brand {
     max-width: var(--layout-max-width);
@@ -725,6 +792,7 @@ a {
   .hero,
   .cta-block,
   .portfolio,
+  .testimonials,
   .site-footer,
   .footer-brand {
     max-width: var(--layout-max-width);
@@ -757,6 +825,11 @@ a {
     padding-right: clamp(1.25rem, 4vw, 2rem);
   }
 
+  .testimonials {
+    padding-left: clamp(1.25rem, 4vw, 2rem);
+    padding-right: clamp(1.25rem, 4vw, 2rem);
+  }
+
   .site-footer {
     padding-left: clamp(1.25rem, 4vw, 2rem);
     padding-right: clamp(1.25rem, 4vw, 2rem);
@@ -780,6 +853,7 @@ a {
   .hero,
   .cta-block,
   .portfolio,
+  .testimonials,
   .site-footer,
   .footer-brand {
     max-width: var(--layout-max-width);

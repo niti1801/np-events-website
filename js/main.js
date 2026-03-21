@@ -133,7 +133,7 @@
   function initScrollReveals() {
     if (typeof IntersectionObserver === "undefined") return;
 
-    var revealEls = document.querySelectorAll(".section-title, .project");
+    var revealEls = document.querySelectorAll(".section-title, .project, .testimonial");
 
     revealEls.forEach(function (el) {
       el.setAttribute("data-reveal", "");
